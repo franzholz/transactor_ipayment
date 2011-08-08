@@ -1,0 +1,15 @@
+# cat = iPayment/general; type=string; label=Account-ID: Ihre Kontonummer im iPayment System
+accountId = 99999
+# cat = iPayment/general; type=string; label=Application ID: Anwendungs ID
+trxuser_id = 99999
+# cat = iPayment/general; type=string; label=Application password: Anwendungspasswort
+trxpassword = 0
+# cat = iPayment/general; type=string; label=Admin action password: Adminaktionspasswort
+adminactionpassword = 5cfgRT34xsdedtFLdfHxj7tfwx24fe
+# cat = iPayment/general; type=string; label=Security Key:
+security_key = qundhft67dnft
+# cat = iPayment/general; type=string; label=Payment type: Zahlungsart. z. B. definiert "cc" Kreditkartenzahlungen und "elv" das Lastschriftverfahren. Auf den ipayment-Technikseiten erhalten Sie mehr Informationen.
+trx_paymenttyp = cc
+# cat = iPayment/general; type=string; label= URI path: only the path part of the URI for the iPayment Gateway for processing. "<AccountID>" will be replaced automatically by the accountId from above
+provideruri = https://ipayment.de/merchant/<AccountID>/processor.php
+
