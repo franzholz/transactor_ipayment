@@ -2,7 +2,7 @@
 /***************************************************************
 *  Copyright notice
 *
-*  (c) 2011 Franz Holzinger (franz@ttproducts.de)
+*  (c) 2013 Franz Holzinger (franz@ttproducts.de)
 *  All rights reserved
 *
 *  This script is part of the Typo3 project. The Typo3 project is
@@ -41,7 +41,7 @@
 
 
 
-require_once (t3lib_extMgM::extPath('transactor') . 'model/class.tx_transactor_gateway.php');
+// require_once (t3lib_extMgM::extPath('transactor') . 'model/class.tx_transactor_gateway.php');
 
 
 
@@ -67,7 +67,7 @@ class tx_transactoripayment_gateway extends tx_transactor_gateway {
 	 * @access	public
 	 */
 	public function transaction_formGetActionURI () {
-		if ($this->getGatewayMode() == TX_TRANSACTOR_GATEWAYMODE_FORM)	{
+		if ($this->getGatewayMode() == TX_TRANSACTOR_GATEWAYMODE_FORM) {
 			$result = str_replace('<AccountID>', $this->conf['accountId'], $this->conf['provideruri']);
 		} else {
 			$result = FALSE;
@@ -166,13 +166,17 @@ class tx_transactoripayment_gateway extends tx_transactor_gateway {
 		}
 
 		$hashParamArray = array();
-		$fieldArray = array('trxuser_id', 'trx_amount', 'trx_currency', 'trxpassword', 'security_key');
+		$hashFieldArray = array('trxuser_id', 'trx_amount', 'trx_currency', 'trxpassword', 'security_key');
 
-		foreach ($fieldArray as $field) {
-			$hashParamArray[$field] = $paramArray[$field];
+		foreach ($hashFieldArray as $field) {
+			$hashParamArray[$field] = $fieldsArray[$field];
 		}
+
 		$securityHash = $this->createHash($hashParamArray);
 		$fieldsArray['trx_securityhash'] = $securityHash;
+
+		unset($fieldsArray['security_key'])
+		unset($fieldsArray['adminactionpassword']);
 
 		return $fieldsArray;
 	}
@@ -260,6 +264,8 @@ class tx_transactoripayment_gateway extends tx_transactor_gateway {
 					$paramArray[$type] = $value;
 				}
 			}
+
+			$paramArray['security_key'] = $this->conf['security_key'];
 
 			$hashParamArray = array();
 			$fieldArray = array('trxuser_id', 'trx_amount', 'trx_currency', 'ret_authcode', 'ret_trx_number', 'security_key');

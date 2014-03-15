@@ -1,14 +1,9 @@
 <?php
 
-########################################################################
-# Extension Manager/Repository config file for ext "transactor_ipayment".
-#
-# Auto generated 08-08-2011 23:35
-#
-# Manual updates:
-# Only the data in the array - everything else is removed by next
-# writing. "version" and "dependencies" must not be touched!
-########################################################################
+/***************************************************************
+ * Extension Manager/Repository config file for ext "transactor_ipayment".
+ ***************************************************************/
+
 
 $EM_CONF[$_EXTKEY] = array(
 	'title' => 'Transactor iPayment Gateway',
@@ -29,9 +24,10 @@ $EM_CONF[$_EXTKEY] = array(
 	'clearCacheOnLoad' => 0,
 	'lockType' => '',
 	'author_company' => '',
-	'version' => '0.0.1',
+	'version' => '0.0.2',
 	'constraints' => array(
 		'depends' => array(
+			'typo3' => '4.5.0-6.2.0',
 			'php' => '5.2.0-0.0.0',
 			'transactor' => '0.1.0-',
 		),
